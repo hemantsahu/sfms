@@ -133,6 +133,7 @@ if(isset($_POST["search_student"]))
                     </tr>
         ';
 
+        if(isset($row_1['acedemic_standard_id'])) {
                 $query_2 = "
                 SELECT fees_month, fees_data, fees_id FROM sfms_fees 
                 WHERE acedemic_year_id = '".trim($formdata['acedemic_year_id'])."' 
@@ -140,7 +141,7 @@ if(isset($_POST["search_student"]))
                 AND fees_status = 'Enable' 
                 ORDER BY fees_id ASC
                 ";
-
+            
                 $result_2 = $connect->query($query_2, PDO::FETCH_ASSOC);
 
                 $count_pending_fees = 0;
@@ -219,7 +220,7 @@ if(isset($_POST["search_student"]))
 
 
                 }
-
+            }
         $student_data .= '
                 </table>
             </div>

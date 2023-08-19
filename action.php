@@ -639,6 +639,16 @@ if(isset($_POST['action']))
 
 		echo $output;
 	}
+
+	// fetch_acedemic_month_data (Fees Master)
+	if($_POST['action'] == 'fetch_acedemic_month_data')
+	{
+		for($i = 0; $i < count($month_array); $i++)
+		{
+			echo '<option value="'.$month_array[$i].'">'.$month_array[$i].'</option>';
+		}
+	}
+
 }
 
 ?>
