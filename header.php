@@ -10,7 +10,7 @@
         <link href="<?php echo $base_url; ?>css/styles.css" rel="stylesheet" />
         <link href="<?php echo $base_url; ?>css/dataTables.bootstrap5.min.css" rel="stylesheet" />
 
-        <link href="<?php echo $base_url; ?>css/bootstrap-select.min.css" rel="stylesheet" />
+        <!-- <link href="<?php echo $base_url; ?>css/bootstrap-select.min.css" rel="stylesheet" /> -->
         <link href="<?php echo $base_url; ?>css/daterangepicker.css" rel="stylesheet" />
 
         <script src="<?php echo $base_url; ?>js/jquery-3.5.1.js"></script>
@@ -25,7 +25,10 @@
 
         <script src="<?php echo $base_url; ?>js/moment.min.js"></script>
         <script src="<?php echo $base_url; ?>js/daterangepicker.min.js"></script>
-        
+
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>        
+
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">

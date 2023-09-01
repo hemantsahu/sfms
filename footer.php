@@ -22,5 +22,12 @@
         
         
     </body>
+
+    <!-- Search functionality for all the select dropdowns -->
+    <script>
+        $('select').select2({
+			placeholder: 'Select an option'
+		});
+    </script>
 </html>
 				
