@@ -167,7 +167,6 @@ function Fees_month_list_data($connect, $acedemic_year_id, $month_array)
 	$query = "SELECT * FROM sfms_acedemic_year WHERE acedemic_year_id = '".$acedemic_year_id."'";
 
 	$result = $connect->query($query, PDO::FETCH_ASSOC);
-	print_r($result);
 	$output = '<option value="">Select Month</option>';
 
 	$start_month_index = 0;
