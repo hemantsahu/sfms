@@ -21,6 +21,16 @@ if(isset($_POST["search_pending_fees_data"]))
 {
     $formdata = array();
 
+    $formdata['status'] = trim($_POST["status"]);
+    // if(empty($_POST["status"]))
+    // {
+    //     $error .= '<li>Please Select Academic Year</li>';
+    // }
+    // else
+    // {
+    //     $formdata['status'] = trim($_POST["status"]);
+    // }
+
     if(empty($_POST["acedemic_year_id"]))
     {
         $error .= '<li>Please Select Academic Year</li>';
@@ -134,24 +144,54 @@ if(isset($_POST["search_pending_fees_data"]))
             if($statement->rowCount() > 0)
             {
                 $fees_status = '<span class="badge bg-success">Paid</span>';
+                if($formdata['status'] == 'paid'){
+                    $student_data .= '
+                    <tr>
+                        <td>'.$row["acedemic_start_month"].' '.$row["acedemic_start_year"].' - '.$row["acedemic_end_month"].' '.$row["acedemic_end_year"].'</td>
+                        <td>'.$fees_month.'</td>
+                        <td>'.$row["student_number"].'</td>
+                        <td>'.$row["student_name"].'</td>
+                        <td>'.$row["student_contact_number1"].'</td>
+                        <td>'.$row["acedemic_standard_name"].' - '.$row["acedemic_standard_division"].'</td>
+                        <td><span style="font-family: DejaVu Sans; sans-serif;">&#8377;</span>'.$fees_amount.'</td>
+                        <td>'.$fees_status.'</td>
+                    </tr>
+                ';
+                }
             }
             else
             {
                 $fees_status = '<span class="badge bg-danger">Not Paid</span>';
+                if($formdata['status'] == 'unpaid'){
+                    $student_data .= '
+                    <tr>
+                        <td>'.$row["acedemic_start_month"].' '.$row["acedemic_start_year"].' - '.$row["acedemic_end_month"].' '.$row["acedemic_end_year"].'</td>
+                        <td>'.$fees_month.'</td>
+                        <td>'.$row["student_number"].'</td>
+                        <td>'.$row["student_name"].'</td>
+                        <td>'.$row["student_contact_number1"].'</td>
+                        <td>'.$row["acedemic_standard_name"].' - '.$row["acedemic_standard_division"].'</td>
+                        <td><span style="font-family: DejaVu Sans; sans-serif;">&#8377;</span>'.$fees_amount.'</td>
+                        <td>'.$fees_status.'</td>
+                    </tr>
+                ';
+                }
             }
 
-            $student_data .= '
-                        <tr>
-                            <td>'.$row["acedemic_start_month"].' '.$row["acedemic_start_year"].' - '.$row["acedemic_end_month"].' '.$row["acedemic_end_year"].'</td>
-                            <td>'.$fees_month.'</td>
-                            <td>'.$row["student_number"].'</td>
-                            <td>'.$row["student_name"].'</td>
-                            <td>'.$row["student_contact_number1"].'</td>
-                            <td>'.$row["acedemic_standard_name"].' - '.$row["acedemic_standard_division"].'</td>
-                            <td><span style="font-family: DejaVu Sans; sans-serif;">&#8377;</span>'.$fees_amount.'</td>
-                            <td>'.$fees_status.'</td>
-                        </tr>
+            if($formdata['status'] == ''){
+                $student_data .= '
+                <tr>
+                    <td>'.$row["acedemic_start_month"].' '.$row["acedemic_start_year"].' - '.$row["acedemic_end_month"].' '.$row["acedemic_end_year"].'</td>
+                    <td>'.$fees_month.'</td>
+                    <td>'.$row["student_number"].'</td>
+                    <td>'.$row["student_name"].'</td>
+                    <td>'.$row["student_contact_number1"].'</td>
+                    <td>'.$row["acedemic_standard_name"].' - '.$row["acedemic_standard_division"].'</td>
+                    <td><span style="font-family: DejaVu Sans; sans-serif;">&#8377;</span>'.$fees_amount.'</td>
+                    <td>'.$fees_status.'</td>
+                </tr>
             ';
+            }
         }
 
         $student_data .= '
@@ -247,6 +287,14 @@ include('header.php');
 						<label>Select Fees Month <span class="text-danger">*</span></label>
 						<select name="fees_id" id="fees_id" class="form-control">
 						    <?php echo $fees_month_list_box; ?>
+						</select>
+                    </div>
+                    <div class="col-md-3">
+						<label>Select Status</label>
+						<select name="status" id="status" class="form-control">
+                            <option value="">Select Status</option>
+						    <option value="paid">Paid</option>
+                            <option value="unpaid">Un Paid</option>
 						</select>
                     </div>
                     
