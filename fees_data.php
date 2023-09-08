@@ -292,7 +292,7 @@ include('header.php');
                     <div class="col-md-3">
 						<label>Select Status</label>
 						<select name="status" id="status" class="form-control">
-                            <option value="">Select Status</option>
+                            <option value=" ">Select Status</option>
 						    <option value="paid">Paid</option>
                             <option value="unpaid">Un Paid</option>
 						</select>
