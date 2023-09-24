@@ -92,6 +92,24 @@ if(isset($_POST['add_student']))
 		$formdata['student_date_of_addmission'] = trim($_POST['student_date_of_addmission']);
 	}
 
+	if(empty($_POST['session_from']))
+	{
+		$error .= '<li>Session From Year is required</li>';
+	}
+	else
+	{
+		$formdata['session_from'] = trim($_POST['session_from']);
+	}
+
+	if(empty($_POST['session_to']))
+	{
+		$error .= '<li>Session To Year is required</li>';
+	}
+	else
+	{
+		$formdata['session_to'] = trim($_POST['session_to']);
+	}
+
 	if(empty($_POST['student_contact_number1']))
 	{
 		$error .= '<li>Contact Number is required</li>';
@@ -150,6 +168,8 @@ if(isset($_POST['add_student']))
 			':student_date_of_birth'	=>	$formdata['student_date_of_birth'],
 			':student_address'		=>	$formdata['student_address'],
 			':student_date_of_addmission'	=>	$formdata['student_date_of_addmission'],
+			':session_from'	=>	$formdata['session_from'],
+			':session_to'	=>	$formdata['session_to'],
 			':student_contact_number1'	=>	$formdata['student_contact_number1'],
 			':student_contact_number2'	=>	$formdata['student_contact_number2'],
 			':student_image'		=>	$formdata['student_image'],
@@ -158,7 +178,7 @@ if(isset($_POST['add_student']))
 
 		$query = '
 		INSERT INTO sfms_student 
-		(student_number, student_name, student_father_name, student_mother_name, student_date_of_birth, student_address, student_date_of_addmission, student_contact_number1, student_contact_number2, student_image, student_added_on ) VALUES (:student_number, :student_name, :student_father_name, :student_mother_name, :student_date_of_birth, :student_address, :student_date_of_addmission, :student_contact_number1, :student_contact_number2, :student_image, :student_added_on)
+		(student_number, student_name, student_father_name, student_mother_name, student_date_of_birth, student_address, student_date_of_addmission, session_from, session_to, student_contact_number1, student_contact_number2, student_image, student_added_on ) VALUES (:student_number, :student_name, :student_father_name, :student_mother_name, :student_date_of_birth, :student_address, :student_date_of_addmission, :session_from, :session_to, :student_contact_number1, :student_contact_number2, :student_image, :student_added_on)
 		';
 
 		$statement = $connect->prepare($query);
@@ -227,6 +247,24 @@ if(isset($_POST['edit_student']))
 		$formdata['student_date_of_addmission'] = trim($_POST['student_date_of_addmission']);
 	}
 
+	if(empty($_POST['session_from']))
+	{
+		$error .= '<li>Session From Year is required</li>';
+	}
+	else
+	{
+		$formdata['session_from'] = trim($_POST['session_from']);
+	}
+
+	if(empty($_POST['session_to']))
+	{
+		$error .= '<li>Session To Year is required</li>';
+	}
+	else
+	{
+		$formdata['session_to'] = trim($_POST['session_to']);
+	}
+
 	if(empty($_POST['student_contact_number1']))
 	{
 		$error .= '<li>Contact Number is required</li>';
@@ -280,6 +318,8 @@ if(isset($_POST['edit_student']))
 			':student_date_of_birth'	=>	$formdata['student_date_of_birth'],
 			':student_address'		=>	$formdata['student_address'],
 			':student_date_of_addmission'	=>	$formdata['student_date_of_addmission'],
+			':student_date_of_addmission'	=>	$formdata['session_from'],
+			':student_date_of_addmission'	=>	$formdata['session_to'],
 			':student_contact_number1'	=>	$formdata['student_contact_number1'],
 			':student_contact_number2'	=>	$formdata['student_contact_number2'],
 			':student_image'		=>	$formdata['student_image'],
@@ -295,6 +335,8 @@ if(isset($_POST['edit_student']))
 		student_date_of_birth = :student_date_of_birth, 
 		student_address = :student_address, 
 		student_date_of_addmission = :student_date_of_addmission, 
+		session_from = :session_from,
+		session_to = :session_to,
 		student_contact_number1 = :student_contact_number1, 
 		student_contact_number2 = :student_contact_number2, 
 		student_image = :student_image, 
@@ -366,6 +408,11 @@ include('header.php');
 						<div class="mb-3">
 							<label>Date of Addmission <span class="text-danger">*</span></label>
 							<input type="text" name="student_date_of_addmission" class="form-control select_date" readonly />
+						</div>
+						<div class="mb-3">
+							<label>From - To: <span class="text-danger">*</span></label>
+							<input type="date" name="session_from">
+							<input type="date" name="session_to">
 						</div>
 						<div class="mb-3">
 							<label>Contact Number 1 <span class="text-danger">*</span></label>
@@ -450,6 +497,11 @@ include('header.php');
 							<input type="text" name="student_date_of_addmission" class="form-control select_date" value="<?php echo $student_row["student_date_of_addmission"]; ?>" readonly />
 						</div>
 						<div class="mb-3">
+							<label>From - To: <span class="text-danger">*</span></label>
+							<input type="date" name="session_from" value="<?php echo $student_row["session_from"]; ?>">
+							<input type="date" name="session_to" value="<?php echo $student_row["session_to"]; ?>">
+						</div>
+						<div class="mb-3">
 							<label>Contact Number 1 <span class="text-danger">*</span></label>
 							<input type="text" name="student_contact_number1" class="form-control" value="<?php echo $student_row['student_contact_number1'];  ?>" />
 						</div>
@@ -524,6 +576,8 @@ include('header.php');
 						<th>Image</th>
 						<th>Student Number</th>
 						<th>Student Name</th>
+						<th>From</th>
+						<th>To</th>
 						<th>Action</th>
 					</tr>
 				</thead>

@@ -298,6 +298,10 @@ if(isset($_POST['action']))
 
 			$sub_array[] = $row['student_name'];
 
+			$sub_array[] = $row['session_from'];
+
+			$sub_array[] = $row['session_to'];
+
 			$sub_array[] = '<a href="student.php?action=edit&id='.$row["student_id"].'" class="btn btn-sm btn-primary">Edit</a>';
 
 			$data[] = $sub_array;
